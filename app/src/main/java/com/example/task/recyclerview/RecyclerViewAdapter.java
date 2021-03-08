@@ -63,7 +63,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("city", city);
                 v.getContext().startActivity(intent);
             }
-
         });
     }
 

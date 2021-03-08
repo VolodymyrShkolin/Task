@@ -9,13 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Request {
 
-//    public Api buildRetrofitConfig(){
-//        Retrofit.Builder retrofit = new Retrofit.Builder()
-//                .baseUrl(Api.BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()));
-//        return retrofit.build().create(Api.class);
-//    }
-
     public Api buildRetrofitConfig(){
         OkHttpClient.Builder httpClient = getBaseHttpConfig();
         retrofit2.Retrofit.Builder retrofit = new retrofit2.Retrofit.Builder()

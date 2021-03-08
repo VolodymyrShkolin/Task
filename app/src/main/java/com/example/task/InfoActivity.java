@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 public class InfoActivity extends AppCompatActivity {
-
     TextView firstName, lastName, date, age, city;
     ImageView photoPerson;
 
@@ -42,6 +41,5 @@ public class InfoActivity extends AppCompatActivity {
         age.setText(mAge);
         city.setText(mCity);
         Glide.with(this).load(photo).into(photoPerson);
-
     }
 }

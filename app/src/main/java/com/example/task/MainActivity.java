@@ -19,9 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-
-
-    RecyclerView date_dimeRV;
+    RecyclerView usersRV;
     GridLayoutManager gridLayoutManager;
     RecyclerViewAdapter adapter;
 
@@ -30,10 +28,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        date_dimeRV = findViewById(R.id.recyclerview);
+        usersRV = findViewById(R.id.recyclerview);
         gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
-        date_dimeRV.setLayoutManager(gridLayoutManager);
+        usersRV.setLayoutManager(gridLayoutManager);
 
         startRequest();
     }
@@ -49,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                                    @NotNull Response<RandomUserResponse> response) {
                 if(response.isSuccessful()) {
                     adapter = new RecyclerViewAdapter(response.body().getResults(), getApplicationContext());
-                    date_dimeRV.setAdapter(adapter);
+                    usersRV.setAdapter(adapter);
                 }else {
                     Toast.makeText(getApplicationContext(), "Sorry, we did't find nobody(",
                             Toast.LENGTH_LONG).show();
