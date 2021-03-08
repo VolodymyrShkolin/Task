@@ -23,7 +23,6 @@ public class InfoActivity extends AppCompatActivity {
         date = findViewById(R.id.date);
         age = findViewById(R.id.age);
         city = findViewById(R.id.city);
-
         photoPerson = findViewById(R.id.photoPerson);
 
         Intent intent = getIntent();

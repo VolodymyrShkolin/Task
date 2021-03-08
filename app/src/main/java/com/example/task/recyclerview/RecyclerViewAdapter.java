@@ -19,7 +19,6 @@ import com.example.task.data.ResultsItem;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-
     List<ResultsItem> list_;
     Context context;
 
@@ -41,7 +40,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Glide.with(context).load(list_.get(position).getPicture().getLarge()).into(holder.photo);
-
         holder.name.setText(String.format(list_.get(position).getName().getFirst()));
 
         String firstName = String.format("First name: %s", list_.get(position).getName().getFirst());
@@ -49,7 +47,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String date = String.format("Date: %s", date(list_.get(position).getDob().getDate()));
         String age = String.format("Age: %s", list_.get(position).getDob().getAge());
         String city = String.format("City: %s", list_.get(position).getLocation().getCity());
-
 
         holder.photo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,13 +75,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             name = itemView.findViewById(R.id.name);
             photo = itemView.findViewById(R.id.photo);
-
         }
     }
 
     private String date(String dateInfo){
         String[] info = dateInfo.split(":");
-        String result = info[0].substring(0,10);
-        return result;
+        return info[0].substring(0,10);
     }
 }

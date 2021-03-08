@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         usersRV = findViewById(R.id.recyclerview);
         gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         usersRV.setLayoutManager(gridLayoutManager);
-
         startRequest();
     }
 
@@ -56,6 +55,5 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<RandomUserResponse> call, Throwable t) {
             }
         });
-
     }
 }
