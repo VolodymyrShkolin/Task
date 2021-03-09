@@ -10,10 +10,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.task.databinding.ActivityInfoBinding;
+import com.example.task.user.User;
 
 public class InfoActivity extends AppCompatActivity {
-    TextView firstName, lastName, date, age, city;
-    ImageView photoPerson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,16 +20,7 @@ public class InfoActivity extends AppCompatActivity {
         ActivityInfoBinding activityInfoBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_info);
 
-
-        firstName = findViewById(R.id.first_name);
-        lastName = findViewById(R.id.last_name);
-        date = findViewById(R.id.date);
-        age = findViewById(R.id.age);
-        city = findViewById(R.id.city);
-        photoPerson = findViewById(R.id.photoPerson);
-
         Intent intent = getIntent();
-
         String mFirstName = intent.getStringExtra("firstName");
         String mLastName = intent.getStringExtra("lastName");
         String mDate = intent.getStringExtra("date");
@@ -38,11 +28,7 @@ public class InfoActivity extends AppCompatActivity {
         String mCity = intent.getStringExtra("city");
         String photo = intent.getStringExtra("photo");
 
-        firstName.setText(mFirstName);
-        lastName.setText(mLastName);
-        date.setText(mDate);
-        age.setText(mAge);
-        city.setText(mCity);
-        Glide.with(this).load(photo).into(photoPerson);
+        User user = new User(photo, mFirstName, mLastName, mDate, mAge, mCity);
+        activityInfoBinding.setUser(user);
     }
 }
