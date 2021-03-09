@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.task.InfoActivity;
 import com.example.task.R;
 import com.example.task.data.ResultsItem;
+import com.example.task.databinding.RandomPersonLayoutBinding;
 
 import java.util.List;
 
@@ -31,16 +32,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.random_person_layout, parent, false);
-        return new ViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        RandomPersonLayoutBinding randomPersonLayoutBinding = RandomPersonLayoutBinding
+                .inflate(layoutInflater, parent, false);
+        return new ViewHolder(randomPersonLayoutBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        Glide.with(context).load(list_.get(position).getPicture().getLarge()).into(holder.photo);
-        holder.name.setText(String.format(list_.get(position).getName().getFirst()));
+        ResultsItem user = list_.get(position);
+        holder.mRandomPersonLayoutBinding.setUserRI(user);
 
         String firstName = String.format("First name: %s", list_.get(position).getName().getFirst());
         String lastName = String.format("Last name: %s", list_.get(position).getName().getLast());
@@ -48,7 +49,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String age = String.format("Age: %s", list_.get(position).getDob().getAge());
         String city = String.format("City: %s", list_.get(position).getLocation().getCity());
 
-        holder.photo.setOnClickListener(new View.OnClickListener() {
+        holder.mRandomPersonLayoutBinding.photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), InfoActivity.class);
@@ -69,12 +70,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        ImageView photo;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            name = itemView.findViewById(R.id.name);
-            photo = itemView.findViewById(R.id.photo);
+        RandomPersonLayoutBinding mRandomPersonLayoutBinding;
+
+        public ViewHolder(@NonNull RandomPersonLayoutBinding randomPersonLayoutBinding) {
+            super(randomPersonLayoutBinding.getRoot());
+            this.mRandomPersonLayoutBinding = randomPersonLayoutBinding;
+
         }
     }
 

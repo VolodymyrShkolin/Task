@@ -1,5 +1,10 @@
 package com.example.task.data;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
 import com.google.gson.annotations.SerializedName;
 
 public class ResultsItem{
@@ -86,5 +91,12 @@ public class ResultsItem{
 
 	public Picture getPicture(){
 		return picture;
+	}
+
+	@BindingAdapter("android:loadImageRI")
+	public static void loadImageRI(ImageView imageView, String imageUrl){
+		Glide.with(imageView)
+				.load(imageUrl)
+				.into(imageView);
 	}
 }
