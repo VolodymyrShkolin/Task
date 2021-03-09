@@ -36,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startRequest() {
         Api api = new Request().buildRetrofitConfig();
-        Call<RandomUserResponse> call = api.getWeatherForecastResult
-                (Api.cnt);
+        Call<RandomUserResponse> call = api.getWeatherForecastResult();
 
         call.enqueue(new Callback<RandomUserResponse>() {
             @Override
