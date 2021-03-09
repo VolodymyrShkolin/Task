@@ -1,6 +1,7 @@
 package com.example.task;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.task.databinding.ActivityInfoBinding;
 
 public class InfoActivity extends AppCompatActivity {
     TextView firstName, lastName, date, age, city;
@@ -16,7 +18,9 @@ public class InfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info);
+        ActivityInfoBinding activityInfoBinding = DataBindingUtil
+                .setContentView(this, R.layout.activity_info);
+
 
         firstName = findViewById(R.id.first_name);
         lastName = findViewById(R.id.last_name);
