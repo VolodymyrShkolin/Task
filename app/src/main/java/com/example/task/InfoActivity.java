@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,23 +13,20 @@ import com.bumptech.glide.Glide;
 import com.example.task.databinding.ActivityInfoBinding;
 import com.example.task.user.User;
 
-public class InfoActivity extends AppCompatActivity {
+import org.parceler.Parcels;
 
+public class InfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityInfoBinding activityInfoBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_info);
+        Parcelable parcelable = getIntent().getParcelableExtra("DATA_KEY");
+        User parcUser = Parcels.unwrap(parcelable);
 
-        Intent intent = getIntent();
-        String mFirstName = intent.getStringExtra("firstName");
-        String mLastName = intent.getStringExtra("lastName");
-        String mDate = intent.getStringExtra("date");
-        String mAge = intent.getStringExtra("age");
-        String mCity = intent.getStringExtra("city");
-        String photo = intent.getStringExtra("photo");
-
-        User user = new User(photo, mFirstName, mLastName, mDate, mAge, mCity);
+        User user = new User(parcUser.getImageUrl(), parcUser.getFirstName(),
+                parcUser.getLastName(), parcUser.getDate(),
+                parcUser.getAge(), parcUser.getCity());
         activityInfoBinding.setUser(user);
     }
 }

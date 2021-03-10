@@ -6,6 +6,9 @@ import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class User {
     private String imageUrl;
     private String firstName;
@@ -14,10 +17,7 @@ public class User {
     private String age;
     private String city;
 
-    public User(String imageUrl, String firstName){
-        this.imageUrl=imageUrl;
-        this.firstName=firstName;
-    }
+    public User(){ }
 
     public User(String imageUrl, String firstName,
                 String lastName, String date,

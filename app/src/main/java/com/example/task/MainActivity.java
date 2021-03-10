@@ -13,6 +13,7 @@ import com.example.task.data.RandomUserResponse;
 import com.example.task.recyclerview.RecyclerViewAdapter;
 
 import org.jetbrains.annotations.NotNull;
+import org.parceler.Parcel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
