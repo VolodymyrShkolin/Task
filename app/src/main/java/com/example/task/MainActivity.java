@@ -31,12 +31,13 @@ public class MainActivity extends AppCompatActivity {
         usersRV = findViewById(R.id.recyclerview);
         gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         usersRV.setLayoutManager(gridLayoutManager);
+        usersRV.setHasFixedSize(true);
         startRequest();
     }
 
     private void startRequest() {
         Api api = new Request().buildRetrofitConfig();
-        Call<RandomUserResponse> call = api.getWeatherForecastResult();
+        Call<RandomUserResponse> call = api.getWeatherForecastResult(Api.cnt);
 
         call.enqueue(new Callback<RandomUserResponse>() {
             @Override
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<RandomUserResponse> call, Throwable t) {
+
             }
         });
     }
