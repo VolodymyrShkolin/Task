@@ -9,14 +9,7 @@ public class RandomUserResponse{
 	@SerializedName("results")
 	private List<ResultsItem> results;
 
-	@SerializedName("info")
-	private Info info;
-
 	public List<ResultsItem> getResults(){
 		return results;
-	}
-
-	public Info getInfo(){
-		return info;
 	}
 }

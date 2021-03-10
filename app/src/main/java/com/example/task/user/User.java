@@ -84,4 +84,9 @@ public class User {
                 .load(imageUrl)
                 .into(imageView);
     }
+
+   public static String date(String dateInfo){
+        String[] info = dateInfo.split(":");
+        return info[0].substring(0,10);
+    }
 }

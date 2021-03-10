@@ -46,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String photo = list_.get(position).getPicture().getLarge();
         String firstName = String.format("First name: %s", list_.get(position).getName().getFirst());
         String lastName = String.format("Last name: %s", list_.get(position).getName().getLast());
-        String date = String.format("Date: %s", date(list_.get(position).getDob().getDate()));
+        String date = String.format("Date: %s", User.date(list_.get(position).getDob().getDate()));
         String age = String.format("Age: %s", list_.get(position).getDob().getAge());
         String city = String.format("City: %s", list_.get(position).getLocation().getCity());
         User parcUser = new User(photo,firstName, lastName, date, age, city);
@@ -75,10 +75,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             this.mRandomPersonLayoutBinding = randomPersonLayoutBinding;
 
         }
-    }
-
-    private String date(String dateInfo){
-        String[] info = dateInfo.split(":");
-        return info[0].substring(0,10);
     }
 }
