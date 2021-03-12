@@ -1,6 +1,5 @@
 package com.example.task.recyclerview;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -9,24 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.task.InfoFragment;
-import com.example.task.R;
 import com.example.task.data.ResultsItem;
 import com.example.task.databinding.RandomPersonLayoutBinding;
 import com.example.task.user.User;
 
 import org.parceler.Parcels;
-
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     List<ResultsItem> list_;
     Context context;
-    NavController navController;
+    final String dataKey = "DATA_KEY";
 
     public RecyclerViewAdapter(List<ResultsItem> list_, Context context)
     {
@@ -62,7 +57,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), InfoFragment.class);
-                intent.putExtra("DATA_KEY", parcelable);
+                intent.putExtra(dataKey, parcelable);
                 v.getContext().startActivity(intent);
             }
         });
@@ -79,7 +74,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(@NonNull RandomPersonLayoutBinding randomPersonLayoutBinding) {
             super(randomPersonLayoutBinding.getRoot());
             this.mRandomPersonLayoutBinding = randomPersonLayoutBinding;
-
         }
     }
 }

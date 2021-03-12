@@ -17,19 +17,15 @@ import com.example.task.user.User;
 import org.parceler.Parcels;
 
 public class InfoFragment extends FragmentActivity {
-
-    public InfoFragment() {
-    }
+    final String dataKey = "DATA_KEY";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FragmentInfoBinding fragmentInfoBinding = DataBindingUtil
                 .setContentView(this, R.layout.fragment_info);
-        Parcelable parcelable = getIntent().getParcelableExtra("DATA_KEY");
-
+        Parcelable parcelable = getIntent().getParcelableExtra(dataKey);
         User parcUser = Parcels.unwrap(parcelable);
-
         User user = new User(parcUser.getImageUrl(), parcUser.getFirstName(),
                 parcUser.getLastName(), parcUser.getDate(),
                 parcUser.getAge(), parcUser.getCity());

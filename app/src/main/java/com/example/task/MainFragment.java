@@ -23,14 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainFragment extends Fragment {
-
     RecyclerView usersRV;
-    GridLayoutManager gridLayoutManager;
-    RecyclerViewAdapter adapter;
-
-
-    public MainFragment() {
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,13 +34,16 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-
-        usersRV = view.findViewById(R.id.recyclerview);
-        gridLayoutManager = new GridLayoutManager(view.getContext(), 2);
-        usersRV.setLayoutManager(gridLayoutManager);
-        usersRV.setHasFixedSize(true);
+        recRequest(view);
         startRequest();
         return view;
+    }
+
+    private void recRequest(View view){
+        usersRV = view.findViewById(R.id.recyclerview);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), 2);
+        usersRV.setLayoutManager(gridLayoutManager);
+        usersRV.setHasFixedSize(true);
     }
 
     private void startRequest() {
@@ -59,10 +55,10 @@ public class MainFragment extends Fragment {
             public void onResponse(@NotNull Call<RandomUserResponse> call,
                                    @NotNull Response<RandomUserResponse> response) {
                 if(response.isSuccessful()) {
-                    adapter = new RecyclerViewAdapter(response.body().getResults(), getContext());
+                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(response.body().getResults(), getContext());
                     usersRV.setAdapter(adapter);
                 }else {
-                    Toast.makeText(getContext(), "Sorry, we did't find nobody(",
+                    Toast.makeText(getContext(), R.string.sorry,
                             Toast.LENGTH_LONG).show();
                 }
             }
