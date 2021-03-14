@@ -64,7 +64,6 @@ public class MainFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<RandomUserResponse> call, Throwable t) {
-                // call.request().body().
             }
         });
     }
