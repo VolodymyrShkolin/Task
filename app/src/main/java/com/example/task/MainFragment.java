@@ -64,6 +64,7 @@ public class MainFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<RandomUserResponse> call, Throwable t) {
+                Toast.makeText(getContext(), (CharSequence) t, Toast.LENGTH_LONG).show();
             }
         });
     }
