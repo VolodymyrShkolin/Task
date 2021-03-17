@@ -2,9 +2,12 @@ package com.example.task;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +27,20 @@ import retrofit2.Response;
 
 public class MainFragment extends Fragment {
     RecyclerView usersRV;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mSwipeRefreshLayout = view.findViewById(R.id.refreshLayoutGo);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+            @Override
+            public void onRefresh() {
+                startRequest();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -36,6 +49,7 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         recRequest(view);
         startRequest();
+
         return view;
     }
 
@@ -46,7 +60,8 @@ public class MainFragment extends Fragment {
         usersRV.setHasFixedSize(true);
     }
 
-    private void startRequest() {
+    public void startRequest( ) {
+
         Api api = new Request().buildRetrofitConfig();
         Call<RandomUserResponse> call = api.getWeatherForecastResult(Api.cnt);
 
@@ -54,16 +69,21 @@ public class MainFragment extends Fragment {
             @Override
             public void onResponse(@NotNull Call<RandomUserResponse> call,
                                    @NotNull Response<RandomUserResponse> response) {
+
                 if(response.isSuccessful()) {
                     RecyclerViewAdapter adapter = new RecyclerViewAdapter(response.body().getResults(), getContext());
                     usersRV.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    mSwipeRefreshLayout.setRefreshing(false);
                 }else {
                     Toast.makeText(getContext(), R.string.sorry,
                             Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<RandomUserResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(getContext(), (CharSequence) t, Toast.LENGTH_LONG).show();
             }
         });

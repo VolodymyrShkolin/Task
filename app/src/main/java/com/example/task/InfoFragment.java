@@ -3,13 +3,9 @@ package com.example.task;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Parcelable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.task.databinding.FragmentInfoBinding;
 import com.example.task.user.User;
@@ -24,6 +20,10 @@ public class InfoFragment extends FragmentActivity {
         super.onCreate(savedInstanceState);
         FragmentInfoBinding fragmentInfoBinding = DataBindingUtil
                 .setContentView(this, R.layout.fragment_info);
+        parcUser(fragmentInfoBinding);
+    }
+
+    private void parcUser(FragmentInfoBinding fragmentInfoBinding){
         Parcelable parcelable = getIntent().getParcelableExtra(dataKey);
         User parcUser = Parcels.unwrap(parcelable);
         User user = new User(parcUser.getImageUrl(), parcUser.getFirstName(),
